@@ -1,5 +1,9 @@
 package com.example.soporte.personas;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
 /**
  * Created by soporte on 04/04/2017.
  */
@@ -66,7 +70,34 @@ public class Persona {
         this.pasatiempos = pasatiempos;
     }
 
-    public void guardar(){
-        Datos.guardar(this);
+    public void guardar(Context contexto){
+
+       //Declarar las variables
+        SQLiteDatabase db;
+        String sql;
+
+        //Abrir la conexión en modo escritura
+        PersonasSQLiteOpenHelper aux = new PersonasSQLiteOpenHelper(contexto,"DBPersonas",null,1);
+        db = aux.getWritableDatabase();
+
+        //Inserción forma 1
+        sql="INSERT INTO Personas values('"+this.getFoto()+"','"+this.getNombre()+"'," +
+                "'"+this.getApellido()+"','"+this.getEdad()+"'," +
+                "'"+this.getPasatiempos()+"')";
+        db.execSQL(sql);
+
+        //Forma No. 2
+       /* ContentValues nuevaPersona = new ContentValues();
+        nuevaPersona.put("foto",this.getFoto());
+        nuevaPersona.put("nombre",this.getNombre());
+        nuevaPersona.put("apellido",this.getApellido());
+        nuevaPersona.put("edad",String.valueOf(this.getEdad()));
+        nuevaPersona.put("pasatiempo",this.getPasatiempos());
+
+        db.insert("Personas",null,nuevaPersona);
+*/
+        db.close();
+
+
     }
 }

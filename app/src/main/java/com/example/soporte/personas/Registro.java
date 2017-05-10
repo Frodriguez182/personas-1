@@ -45,7 +45,7 @@ public class Registro extends AppCompatActivity {
 
         foto = String.valueOf(fotoAleatoria());
         Persona p = new Persona(foto,nombre,apellido,ed,aux);
-        p.guardar();
+        p.guardar(getApplicationContext());
 
         new AlertDialog.Builder(this).setMessage(res.getString(R.string.mensaje)).show();
         limpiar();
@@ -67,7 +67,7 @@ public class Registro extends AppCompatActivity {
 
     public int fotoAleatoria(){
        int fotos[] = {R.drawable.images,R.drawable.images2,R.drawable.images3};
-        int numero = (int) (Math.random() *2);
+        int numero = (int) (Math.random() *3);
         return fotos[numero];
     }
 }
