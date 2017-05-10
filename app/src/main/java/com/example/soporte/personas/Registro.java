@@ -65,6 +65,19 @@ public class Registro extends AppCompatActivity {
 
     }
 
+    public void buscar(View v){
+        String nombre;
+        Persona p;
+
+        nombre=nomb.getText().toString().trim();
+        p = Datos.buscarPersona(getApplicationContext(),nombre);
+
+        if(p!=null) {
+            apell.setText(p.getApellido());
+            edad.setText("" + p.getEdad());
+        }
+    }
+
     public int fotoAleatoria(){
        int fotos[] = {R.drawable.images,R.drawable.images2,R.drawable.images3};
         int numero = (int) (Math.random() *3);
